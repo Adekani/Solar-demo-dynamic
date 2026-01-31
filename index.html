@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VifyGlobal Solar | Future Energy Solutions</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#0c4a6e',
+                        accent: '#f59e0b',
+                        dark: '#0f172a',
+                        light: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.8 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #0ea5e9;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .section-view {
+            display: none;
+            opacity: 0;
+        }
+        .section-view.active {
+            display: block;
+        }
+        /* Loading Overlay */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-light">
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass px-6 py-3 rounded-2xl shadow-lg">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+                    <i class="fas fa-sun text-xl"></i>
+                </div>
+                <span class="text-xl font-extrabold font-display tracking-tight biz-name">VifyGlobal Solar</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
+                <a href="#about" class="nav-link text-sm font-semibold text-slate-600 hover:text-primary transition-colors">About</a>
+                <a href="#services" class="nav-link text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Services</a>
+                <a href="#contact" class="px-5 py-2.5 bg-secondary text-white rounded-full text-sm font-bold hover:bg-black transition-all shadow-md">Get Started</a>
+            </div>
+
+            <button class="md:hidden text-slate-600"><i class="fas fa-bars text-xl"></i></button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="view-container" class="pt-24 min-h-screen">
+        
+        <!-- HOME SECTION -->
+        <section id="home" class="section-view px-6">
+            <div class="max-w-7xl mx-auto py-12 lg:py-20 grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        Next Generation Energy
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold font-display leading-[1.1] text-dark">
+                        Energizing the Future with <span class="text-gradient biz-name">VifyGlobal Solar</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+                        Clean, sustainable, and affordable energy solutions for your home and business. Join the renewable revolution today.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#contact" class="px-8 py-4 bg-primary text-white rounded-2xl font-bold text-lg hover:bg-secondary transition-all shadow-xl shadow-primary/25">Book a Free Consultation</a>
+                        <a href="#services" class="px-8 py-4 bg-white border border-slate-200 text-dark rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all">View Our Work</a>
+                    </div>
+                    <div class="flex items-center gap-6 pt-6">
+                        <div class="flex -space-x-4">
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-slate-200"></div>
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-slate-300"></div>
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-slate-400"></div>
+                        </div>
+                        <div class="text-sm font-medium text-slate-500">
+                            Trusted by <span class="text-dark font-bold">500+</span> Customers
+                        </div>
+                    </div>
+                </div>
+                <div class="relative lg:block">
+                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
+                    <div class="relative bg-white p-4 rounded-[2.5rem] shadow-2xl animate-float">
+                        <div class="bg-slate-100 aspect-square rounded-[2rem] flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-solar-panel text-[10rem] text-primary/20"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="max-w-7xl mx-auto py-12 px-8 bg-secondary rounded-[2.5rem] mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-white relative overflow-hidden">
+                <div class="relative z-10 text-center">
+                    <div class="text-4xl font-bold mb-1"><span class="counter" data-target="98">0</span>%</div>
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">Efficiency</div>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="text-4xl font-bold mb-1"><span class="counter" data-target="1500">0</span>+</div>
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">Installations</div>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="text-4xl font-bold mb-1"><span class="counter" data-target="25">0</span>Yrs</div>
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">Warranty</div>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="text-4xl font-bold mb-1">$<span class="counter" data-target="2">0</span>M+</div>
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">Saved by Clients</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section-view px-6 py-20">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+                <div class="order-2 lg:order-1 relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="h-64 bg-white rounded-3xl shadow-xl p-6 space-y-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h4 class="font-bold">Eco Friendly</h4>
+                            <p class="text-sm text-slate-500">Zero emissions during operation.</p>
+                        </div>
+                        <div class="h-64 bg-white rounded-3xl shadow-xl p-6 mt-12 space-y-4">
+                            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <h4 class="font-bold">Cost Saving</h4>
+                            <p class="text-sm text-slate-500">Reduce electricity bills by up to 90%.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 space-y-8">
+                    <h2 class="text-4xl font-extrabold font-display text-dark">Who We Are At <span class="biz-name">VifyGlobal Solar</span></h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        We are a group of engineers and enthusiasts dedicated to bringing solar power to the masses. Our goal is to make transition to clean energy seamless and accessible for everyone.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </div>
+                            <p class="text-slate-700">Highest grade monocrystalline panels</p>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </div>
+                            <p class="text-slate-700">Smart energy monitoring apps included</p>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </div>
+                            <p class="text-slate-700">Certified local installers and support</p>
+                        </div>
+                    </div>
+                    <button class="text-primary font-bold flex items-center gap-2 group">
+                        Learn about our values
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="section-view px-6 py-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <h2 class="text-4xl font-extrabold font-display">Specialized Solutions</h2>
+                    <p class="text-slate-600">Explore how <span class="biz-name">VifyGlobal Solar</span> adapts to your specific energy needs with our range of precision services.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="group bg-white p-8 rounded-[2rem] border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+                        <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-2xl mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Residential Solar</h3>
+                        <p class="text-slate-500 leading-relaxed mb-6">Complete rooftop installations designed to power your home 24/7 while increasing your property value.</p>
+                        <ul class="space-y-3 text-sm text-slate-400">
+                            <li><i class="fas fa-check-circle text-primary mr-2"></i> Hybrid Systems</li>
+                            <li><i class="fas fa-check-circle text-primary mr-2"></i> Battery Storage</li>
+                        </ul>
+                    </div>
+                    <div class="group bg-white p-8 rounded-[2rem] border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+                        <div class="w-14 h-14 bg-accent/10 text-accent rounded-2xl flex items-center justify-center text-2xl mb-8 group-hover:bg-accent group-hover:text-white transition-colors">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Commercial Energy</h3>
+                        <p class="text-slate-500 leading-relaxed mb-6">Scaleable solar infrastructure for large-scale operations and corporate headquarters.</p>
+                        <ul class="space-y-3 text-sm text-slate-400">
+                            <li><i class="fas fa-check-circle text-accent mr-2"></i> Grid Integration</li>
+                            <li><i class="fas fa-check-circle text-accent mr-2"></i> Usage Analysis</li>
+                        </ul>
+                    </div>
+                    <div class="group bg-white p-8 rounded-[2rem] border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+                        <div class="w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-2xl mb-8 group-hover:bg-secondary group-hover:text-white transition-colors">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Maintenance</h3>
+                        <p class="text-slate-500 leading-relaxed mb-6">Ongoing support and diagnostic checks to ensure your system remains at peak efficiency.</p>
+                        <ul class="space-y-3 text-sm text-slate-400">
+                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Annual Cleaning</li>
+                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Hardware Repairs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section-view px-6 py-20">
+            <div class="max-w-7xl mx-auto flex flex-col items-center justify-center text-center">
+                <div class="bg-white p-12 rounded-[3rem] shadow-2xl max-w-2xl w-full space-y-8 border border-slate-100">
+                    <h2 class="text-4xl font-extrabold font-display">Ready to Switch?</h2>
+                    <p class="text-slate-600">Leave your details below and one of our experts from <span class="biz-name">the team</span> will get back to you within 24 hours.</p>
+                    <form class="space-y-4 text-left" onsubmit="event.preventDefault();">
+                        <div>
+                            <label class="text-sm font-bold text-slate-400 uppercase tracking-widest ml-1 mb-2 block">Your Name</label>
+                            <input type="text" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-primary transition-colors" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-slate-400 uppercase tracking-widest ml-1 mb-2 block">Email Address</label>
+                            <input type="email" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-primary transition-colors" placeholder="john@example.com">
+                        </div>
+                        <button class="w-full py-5 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:bg-secondary transition-all text-lg pt-4">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-20 pb-10 px-6 mt-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 pb-16 border-b border-white/5">
+                <div class="col-span-2 space-y-6">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-sun text-2xl text-primary"></i>
+                        <span class="text-2xl font-extrabold font-display biz-name">VifyGlobal Solar</span>
+                    </div>
+                    <p class="text-slate-400 max-w-sm">Making renewable energy the new standard for modern living across the globe. Join the movement.</p>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="font-bold">Links</h5>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-primary transition-colors">About</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Services</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="font-bold">Support</h5>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Use</a></li>
+                        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-widest">
+                <div>© 2024 <span class="biz-name">VifyGlobal Solar</span>. Powering the Future.</div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. CONFIGURATION & DATA LOADING ---
+        async function initApp() {
+            const loader = document.getElementById('loader');
+            
+            try {
+                // Get biz from URL params
+                const params = new URLSearchParams(window.location.search);
+                const bizId = params.get('biz') || 'vify'; // Default to vify if none provided
+
+                // Fetch the JSON file
+                const response = await fetch('businesses.json');
+                const data = await response.json();
+
+                // Find the business object
+                const bizData = data.businesses.find(b => b.id === bizId);
+
+                if (bizData) {
+                    // Inject the name into all elements with class .biz-name
+                    document.querySelectorAll('.biz-name').forEach(el => {
+                        el.textContent = bizData.name;
+                    });
+                    document.title = `${bizData.name} | Future Energy Solutions`;
+                }
+            } catch (err) {
+                console.error("Error loading biz data:", err);
+            } finally {
+                // Hide loader and start routing
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+                
+                // Initialize Router and existing animations
+                handleRouting();
+                initAnimations();
+            }
+        }
+
+        // --- 2. HASH ROUTING (SAME AS ORIGINAL CONCEPT) ---
+        function handleRouting() {
+            const hash = window.location.hash || '#home';
+            const views = document.querySelectorAll('.section-view');
+            
+            views.forEach(view => {
+                view.classList.remove('active');
+                view.style.display = 'none';
+                view.style.opacity = '0';
+            });
+
+            const activeView = document.querySelector(hash);
+            if (activeView) {
+                activeView.style.display = 'block';
+                activeView.classList.add('active');
+                
+                // GSAP Entry Animation for views
+                gsap.to(activeView, {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+
+                // Trigger counters if home
+                if (hash === '#home') animateCounters();
+            }
+            
+            // Close mobile menu if open (implementation for simplicity)
+            window.scrollTo(0, 0);
+        }
+
+        // --- 3. ORIGINAL ANIMATIONS & EFFECTS ---
+        function initAnimations() {
+            // Nav background change on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.style.padding = '0.5rem 1.5rem';
+                } else {
+                    nav.style.padding = '1rem 1.5rem';
+                }
+            });
+
+            // Service card hover effects
+            const cards = document.querySelectorAll('.group');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { y: -5, duration: 0.3, ease: "power1.out" });
+                });
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { y: 0, duration: 0.3, ease: "power1.out" });
+                });
+            });
+        }
+
+        // Counter Animation
+        let counted = false;
+        function animateCounters() {
+            if (counted) return;
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                gsap.to(counter, {
+                    innerHTML: target,
+                    duration: 3,
+                    snap: { innerHTML: 1 },
+                    ease: "power2.out",
+                    onUpdate: function() {
+                        this.targets()[0].innerHTML = Math.ceil(this.targets()[0].innerHTML).toLocaleString();
+                    }
+                });
+            });
+            counted = true;
+        }
+
+        // Boot
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
