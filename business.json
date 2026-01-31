@@ -1,5 +1,10 @@
 [
   { "id": "biz1", "name": "Business One" },
   { "id": "biz2", "name": "Business Two" },
-  { "id": "biz3", "name": "Business Three" }
+  { "id": "biz3", "name": "Business Three" }, 
+  { "id": "baron", "name": "Baron Tech Ltd" },
+  { "id": "instrapower", "name": "Instrapower Solar" },
+  { "id": "itech", "name": "Itech Energy Co" },
+  { "id": "fenertic", "name": "Fenertic Solar Energy" },
+  { "id": "vinamas", "name": "Vinamas solar power" }
 ]
